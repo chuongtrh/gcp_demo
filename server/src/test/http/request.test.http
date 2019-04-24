@@ -1,0 +1,28 @@
+###
+GET http://localhost:4300/api/users
+content-type: application/json
+
+###
+GET http://localhost:4300/api/users/1
+content-type: application/json
+
+
+###
+GET http://localhost:4300/api/messages
+content-type: application/json
+
+###
+GET http://localhost:4300/api/messages/1
+content-type: application/json
+
+###
+POST  http://localhost:4300/api/messages
+content-type: application/json
+
+{
+    "text": "hello 123"
+}
+
+###
+DELETE  http://localhost:4300/api/messages/1
+content-type: application/json
