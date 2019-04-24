@@ -1,11 +1,13 @@
-FROM node:alpine
+FROM node:8.9-alpine
 
 # Create app directory
+RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
+COPY server /usr/src/app
 # Install app dependencies
 # COPY package.json .
-COPY package*.json ./
+COPY server/package*.json ./
 
 # Set Environment
 ENV NODE_ENV=dev
