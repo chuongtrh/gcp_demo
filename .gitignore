@@ -1,3 +1,7 @@
+# compiled output
+/tmp
+/dist
+
 # Logs
 logs
 *.log
@@ -35,7 +39,11 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
-
+server/node_modules/
+web/node_modules/
+web/build/
+server/src/test/output
+server/src/config/local.js
 # TypeScript v1 declaration files
 typings/
 
@@ -59,3 +67,19 @@ typings/
 
 # next.js build output
 .next
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
