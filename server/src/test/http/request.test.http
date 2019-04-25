@@ -26,3 +26,8 @@ content-type: application/json
 ###
 DELETE  http://localhost:4300/api/messages/1
 content-type: application/json
+
+
+###
+GET https://balmy-channel-211708.appspot.com/api/users
+content-type: application/json

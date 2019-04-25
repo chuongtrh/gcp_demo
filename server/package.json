@@ -1,12 +1,16 @@
 {
-    "name": "server_gpc_demo",
+    "name": "server_gcp_demo",
     "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
+    "description": "Demo gcp",
+    "main": "server.js",
+    "engines": {
+        "node": "8.11.x",
+        "npm": "6.9.x"
+    },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start:local": "nodemon -r esm server.js",
-        "start": "nodemon server.js --exec babel-node",
+        "start": "node -r esm server.js",
         "clean": "rimraf build",
         "prebuild": "npm run clean",
         "build": "babel src -d build"
@@ -14,14 +18,16 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "@google/cloud-errors": "^0.1.2",
+        "@google/cloud-trace": "^0.6.3",
         "body-parser": "^1.18.3",
+        "esm": "^3.2.22",
         "express": "^4.16.4",
         "uuid": "^3.3.2"
     },
     "devDependencies": {
         "babel-cli": "^6.26.0",
         "babel-preset-env": "^1.7.0",
-        "esm": "^3.2.22",
         "nodemon": "^1.18.11",
         "rimraf": "^2.6.3"
     },

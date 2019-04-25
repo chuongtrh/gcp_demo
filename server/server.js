@@ -52,7 +52,7 @@ app.use('/api/messages', routes.message);
 // Error handler for API issues
 app.use('/api', function (err, request, response, next) {
 
-    if (process.env.ENV === 'local') {
+    if (process.env.NODE_ENV === 'local') {
         console.log('uncaughtException', err);
     }
 
@@ -83,7 +83,7 @@ var server = app.listen(process.env.PORT || 4300, function () {
 
 process.on('uncaughtException', function (err) {
 
-    if (process.env.ENV === 'local') {
+    if (process.env.NODE_ENV === 'local') {
         console.log('uncaughtException', err);
     }
 })
