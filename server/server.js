@@ -5,8 +5,10 @@ const path = require('path');
 const routes = require('./src/routes');
 const models = require('./src/models');
 
+console.log('process.env.NODE_ENV', process.env.NODE_ENV);
+
 //Load local.js
-if (fs.existsSync(path.join(__dirname, './src/config/local.js'))) {
+if (process.env.NODE_ENV === undefined && fs.existsSync(path.join(__dirname, './src/config/local.js'))) {
     require('./src/config/local.js')
 } 
 

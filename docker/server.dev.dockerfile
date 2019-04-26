@@ -5,6 +5,9 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 COPY server /usr/src/app
+
+RUN rm -rf /usr/src/app/src/config/local.js
+
 COPY .version /usr/src/app
 
 # Install app dependencies
