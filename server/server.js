@@ -1,13 +1,22 @@
 'use strict';
 
-import routes from './src/routes';
-import models from './src/models';
-import fs from 'fs'
-import path from 'path'
+const fs = require('fs');
+const path = require('path');
+const routes = require('./src/routes');
+const models = require('./src/models');
 
+//Load local.js
 if (fs.existsSync(path.join(__dirname, './src/config/local.js'))) {
     require('./src/config/local.js')
 } 
+
+//Setup version
+if (fs.existsSync(path.join(__dirname, '.version'))) {
+    const version = fs.readFileSync(path.join(__dirname, '.version'));
+    process.env.BUILD_VERSION = version;
+}else{
+    process.env.BUILD_VERSION = 'n/a';    
+}
 
 var errorHandler;
 if (process.env.NODE_ENV === 'production') {
@@ -25,6 +34,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
+app.use('/version', function (req, res) {
+    return res.status(200).send({
+        status: 'running',
+        env: process.env.NODE_ENV,
+        port: process.env.RUN_PORT,
+        version: process.env.BUILD_VERSION
+    })
+});
 
 app.use('/api', function (req, res, next) {
     var IP = req.headers['x-forwarded-for'] || "192.168.1.1";
@@ -79,7 +97,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Start the server
-var server = app.listen(process.env.PORT || 4300, function () {
+var server = app.listen(process.env.RUN_PORT, function () {
     var port = server.address().port;
     console.log(`App listening on port:${port} NODE_ENV:${process.env.NODE_ENV}`);
     console.log('Press Ctrl+C to quit.');

@@ -5,6 +5,8 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 COPY server /usr/src/app
+COPY .version /usr/src/app
+
 # Install app dependencies
 # COPY package.json .
 COPY server/package*.json ./

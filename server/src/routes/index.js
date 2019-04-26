@@ -1,9 +1,3 @@
-import ping from './ping';
-import user from './user';
-import message from './message';
-
-export default {
-  ping,
-  user,
-  message,
-};
+exports.ping = require('./ping');
+exports.user = require('./user');
+exports.message = require('./message');

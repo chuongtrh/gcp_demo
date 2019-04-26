@@ -2,15 +2,15 @@
     "name": "server_gcp_demo",
     "version": "1.0.0",
     "description": "Demo gcp",
-    "main": "server.js",
     "engines": {
         "node": "8.11.x",
         "npm": "6.9.x"
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start:local": "nodemon -r esm server.js",
-        "start": "node -r esm server.js",
+        "prestart:local": "cp ../.version .",
+        "start:local": "nodemon server.js",
+        "start": "node server.js",
         "clean": "rimraf build",
         "prebuild": "npm run clean",
         "build": "babel src -d build"
@@ -21,7 +21,6 @@
         "@google/cloud-errors": "^0.1.2",
         "@google/cloud-trace": "^0.6.3",
         "body-parser": "^1.18.3",
-        "esm": "^3.2.22",
         "express": "^4.16.4",
         "helmet": "^3.16.0",
         "uuid": "^3.3.2"
