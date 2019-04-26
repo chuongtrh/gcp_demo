@@ -2,26 +2,29 @@
 
 import routes from './src/routes';
 import models from './src/models';
+import fs from 'fs'
+import path from 'path'
+
+if (fs.existsSync(path.join(__dirname, './src/config/local.js'))) {
+    require('./src/config/local.js')
+} 
 
 var errorHandler;
-
 if (process.env.NODE_ENV === 'production') {
     require('@google/cloud-trace').start();
     errorHandler = require('@google/cloud-errors').start();
 }
 
+const helmet = require('helmet')
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
 
-var express = require('express');
-var bodyParser = require('body-parser');
-var app = express();
-
-
-
+app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-
 
 app.use('/api', function (req, res, next) {
     var IP = req.headers['x-forwarded-for'] || "192.168.1.1";
@@ -45,6 +48,7 @@ app.use('/api', function (req, res, next) {
     next();
 });
 
+app.use('/api/ping', routes.ping);
 app.use('/api/users', routes.user);
 app.use('/api/messages', routes.message);
 
@@ -77,7 +81,7 @@ if (process.env.NODE_ENV === 'production') {
 // Start the server
 var server = app.listen(process.env.PORT || 4300, function () {
     var port = server.address().port;
-    console.log('App listening on port %s', port);
+    console.log(`App listening on port:${port} NODE_ENV:${process.env.NODE_ENV}`);
     console.log('Press Ctrl+C to quit.');
 });
 

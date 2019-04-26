@@ -1,22 +1,23 @@
-service: gcp-demo-service
 runtime: nodejs
 env: flex
+service: default
 
 env_variables:
-  NODE_ENV: "dev"
+  NODE_ENV: dev
 
 network:
   forwarded_ports:
     - 4300/tcp
 
 instance_class: F2
-automatic_scaling:
+
+manual_scaling:
   min_num_instances: 1
   max_num_instances: 5
-  cool_down_period_sec: 180
-  max_concurrent_requests: 50
+  cool_down_period_sec: 120
+  max_concurrent_requests: 30
   cpu_utilization:
-    target_utilization: 0.6
+    target_utilization: 0.5
 
 health_check:
   enable_health_check: True
@@ -24,8 +25,3 @@ health_check:
   timeout_sec: 4
   unhealthy_threshold: 2
   healthy_threshold: 2
-
-resources:
-  cpu: 1
-  memory_gb: 1
-  disk_size_gb: 10

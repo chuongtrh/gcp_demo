@@ -1,4 +1,8 @@
 ###
+GET http://localhost:4300/api/ping
+content-type: application/json
+
+###
 GET http://localhost:4300/api/users
 content-type: application/json
 
@@ -30,4 +34,8 @@ content-type: application/json
 
 ###
 GET https://balmy-channel-211708.appspot.com/api/users
+content-type: application/json
+
+###
+GET https://balmy-channel-211708.appspot.com/api/ping
 content-type: application/json
