@@ -23,8 +23,6 @@ automatic_scaling:
   max_num_instances: 5
   target_throughput_utilization: 0.5
   max_concurrent_requests: 30
-  max_pending_latency: 8s
-  min_pending_latency: 3s
   cpu_utilization:
     target_utilization: 0.4
 
