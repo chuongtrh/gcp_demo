@@ -1,9 +1,0 @@
-version: '2'
-services:
-  gcp_demo:
-    build: 
-      context: ..
-      dockerfile: docker/server.dev.dockerfile
-    ports:
-     - "4300:4300"
-#docker-compose -p docker up --build

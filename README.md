@@ -23,3 +23,9 @@ $ siege -r100 -d1 -c250 balmy-channel-211708.appspot.com/api/users
 ```
 $ ab -c 100 -n 5000 balmy-channel-211708.appspot.com/api/users
 ```
+
+[artillery](https://artillery.io/docs/getting-started/)
+```
+$ artillery quick -c 100 -n 100 -d 1 https://balmy-channel-211708.appspot.com/api/users
+```
+

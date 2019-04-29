@@ -2,8 +2,6 @@ node_modules
 server/node_modules
 server/build
 server/src/test
-server/.version
-
 package-lock.json
 
 .env

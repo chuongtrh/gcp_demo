@@ -21,12 +21,13 @@ steps:
   
 - id: deploy
   name: 'gcr.io/cloud-builders/gcloud'
-  args: [ 'app', 'deploy', 'server/app.yaml', '--quiet', '--verbosity=debug']
-  timeout: 1600s
+  args: ['app', 'deploy', 'server/app.yaml', '--quiet', '--verbosity=debug']
+  # args: ['app', 'deploy', 'server/app.yaml']
+  timeout: 900s
   waitFor:
     - build
 
-timeout: 1800s
+timeout: 1200s
 substitutions:
   _IMAGE_NAME: gcp-demo-image
 options:

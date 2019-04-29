@@ -5,10 +5,12 @@ const path = require('path');
 const routes = require('./src/routes');
 const models = require('./src/models');
 
-console.log('process.env.NODE_ENV', process.env.NODE_ENV);
-
+if (process.argv[2]){
+    process.env.NODE_ENV = process.argv[2];
+}
 //Load local.js
-if (process.env.NODE_ENV === undefined && fs.existsSync(path.join(__dirname, './src/config/local.js'))) {
+if (process.env.NODE_ENV === 'local' && fs.existsSync(path.join(__dirname, './src/config/local.js'))) {
+    console.log('Setup local env')
     require('./src/config/local.js')
 } 
 
@@ -37,6 +39,14 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+app.use('/liveness_check', function(req, res) {
+    return res.status(200).send();
+});
+
+app.use('/readiness_check', function(req, res) {
+    return res.status(200).send();
+});
+
 app.use('/version', function (req, res) {
     return res.status(200).send({
         status: 'running',
@@ -44,6 +54,15 @@ app.use('/version', function (req, res) {
         port: process.env.RUN_PORT,
         version: process.env.BUILD_VERSION
     })
+});
+
+app.use('/', function(req, res, next) {
+    console.log('req', req.url);
+    if(req.url === '/'){
+        return res.status(200).send();
+    }else{
+        next();
+    }
 });
 
 app.use('/api', function (req, res, next) {
@@ -101,7 +120,7 @@ if (process.env.NODE_ENV === 'production') {
 // Start the server
 var server = app.listen(process.env.RUN_PORT, function () {
     var port = server.address().port;
-    console.log(`App listening on port:${port} NODE_ENV:${process.env.NODE_ENV}`);
+    console.log(`App listening on port:${port} NODE_ENV:${process.env.NODE_ENV}, port:${process.env.RUN_PORT}`);
     console.log('Press Ctrl+C to quit.');
 });
 

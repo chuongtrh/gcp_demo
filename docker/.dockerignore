@@ -1,5 +1,5 @@
 node_modules
 npm-debug.log
 build
-server/src/config/local.js
 server/src/test
+local.js

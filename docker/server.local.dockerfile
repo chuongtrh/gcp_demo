@@ -5,7 +5,6 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 COPY server /usr/src/app
-RUN rm -rf /usr/src/app/src/config/local.js
 RUN rm -rf /usr/src/app/src/test
 
 
@@ -14,13 +13,13 @@ RUN rm -rf /usr/src/app/src/test
 COPY server/package*.json ./
 
 # Set Environment
-ENV NODE_ENV=dev
+ENV NODE_ENV=local
 
 RUN npm install --production
 
 # Bundle app source
 COPY . .
 
-EXPOSE 8080
+EXPOSE 4300
 
 CMD [ "npm", "start"]
