@@ -1,5 +1,4 @@
 # In this directory, run the following command to build this builder.
-# $ gcloud builds submit --config cloudbuild.yaml .
 steps:
 - id: pull_cache_image
   name: 'gcr.io/cloud-builders/docker'
@@ -8,6 +7,7 @@ steps:
   - '-c'
   - |
     docker pull gcr.io/$PROJECT_ID/${_IMAGE_NAME}:latest || exit 0
+
 - id: build
   name: 'gcr.io/cloud-builders/docker'
   args: [ 
@@ -18,18 +18,32 @@ steps:
           '--no-cache',
           '.' 
         ]
-  
-- id: deploy
-  name: 'gcr.io/cloud-builders/gcloud'
-  args: ['app', 'deploy', 'server/app.yaml', '--quiet', '--verbosity=debug']
-  # args: ['app', 'deploy', 'server/app.yaml']
-  timeout: 900s
+
+ # push the container image to Container Registry
+- id: push_image
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/$PROJECT_ID/${_IMAGE_NAME}:latest']
   waitFor:
     - build
 
+  # https://cloud.google.com/run/docs/securing/managing-access
+  # Deploy container image to Cloud Run
+- id: deploy
+  name: 'gcr.io/cloud-builders/gcloud'
+  args: [
+          'beta', 'run', 'deploy', '${_SERVICE_NAME}', 
+          '--image', 'gcr.io/$PROJECT_ID/${_IMAGE_NAME}:latest', 
+          '--region', '${_REGION}', 
+          '--update-env-vars', 'NODE_ENV=dev,RUN_PORT=8080'
+      ]
+  waitFor:
+    - push_image
+
 timeout: 1200s
 substitutions:
+  _SERVICE_NAME: gcp-demo
   _IMAGE_NAME: gcp-demo-image
+  _REGION: us-central1
 options:
   machineType: 'N1_HIGHCPU_8'
   substitution_option: 'ALLOW_LOOSE'

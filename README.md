@@ -1,31 +1,44 @@
 # gcp_demo
 Setup CI/CD for project with both client & server running on GCP
 
-# How to run in local
+# Setup with App Engine
+## How to run in local
 ```
 $ npm install
 $ npm run start:local
 ```
 
-# Run cloud build & deploy
+## Run cloud build & deploy
 ```
 $ npm run deploy:dev
 ```
 
-# Run load test http request
+# Setup with Cloud Run
+## How to run in local
+```
+$ npm install
+$ npm run start:local
+```
+
+## Run cloud build & deploy
+```
+$ npm run deploy:cloudrun
+```
+
+
+# Run load testing http request
 
 [siege](https://www.bigbluedoor.net/blog/benchmarking-siege)
 ```
-$ siege -r100 -d1 -c250 balmy-channel-211708.appspot.com/api/users
+$ siege -r100 -d1 -c250 YOUR_URL/api/users
 ```
 
 [ab](https://httpd.apache.org/docs/2.4/programs/ab.html)
 ```
-$ ab -c 100 -n 5000 balmy-channel-211708.appspot.com/api/users
+$ ab -c 100 -n 5000 YOUR_URL/api/users
 ```
 
 [artillery](https://artillery.io/docs/getting-started/)
 ```
-$ artillery quick -c 100 -n 100 -d 1 https://balmy-channel-211708.appspot.com/api/users
+$ artillery quick -c 100 -n 100 -d 1 YOUR_URL/api/users
 ```
-
