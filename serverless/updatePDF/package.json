@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "deploy": "gcloud functions deploy updatePDF --trigger-http --source=. --runtime nodejs8 --memory 1024MB --region asia-northeast1",
+    "deploy": "gcloud beta functions deploy updatePDF --max-instances 10 --trigger-http --source=. --runtime nodejs8 --memory 1024MB --region asia-northeast1",
     "start:emulator": "functions start",
     "deploy:local": "functions deploy updatePDF --trigger-http --local-path=. --region asia-northeast1",
     "stop:emulator": "functions stop"

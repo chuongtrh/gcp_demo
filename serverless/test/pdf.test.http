@@ -1,9 +1,21 @@
 
 ###
-GET http://localhost:8010/balmy-channel-211708/asia-northeast1/pdf/generate?url=http://example.com
+GET http://localhost:8010/balmy-channel-211708/asia-northeast1/pdf/generate?url=https://github.com
 content-type: application/json
 
 
 ###
 GET https://asia-northeast1-balmy-channel-211708.cloudfunctions.net/pdf/generate?url=http://example.com
 content-type: application/json
+
+ab -c 10 -n 10 asia-northeast1-balmy-channel-211708.cloudfunctions.net/pdf/generate?url=http://example.com
+
+artillery quick -c 10 -n 20 -d 1 https://asia-northeast1-balmy-channel-211708.cloudfunctions.net/pdf/generate?url=http://example.com
+
+artillery quick -c 10 -n 2 -d 2 https://balmy-channel-211708.appspot.com/api/invoice/create?isPaid=0
+
+
+
+ab -c 10 -n 10 localhost:8010/balmy-channel-211708/asia-northeast1/pdf/generate?url=https://github.com
+
+artillery quick -c 10 -n 10 -d 2 http://localhost:8010/balmy-channel-211708/asia-northeast1/pdf/generate?url=https://github.com

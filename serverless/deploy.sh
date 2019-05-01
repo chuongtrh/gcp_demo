@@ -29,7 +29,7 @@ npm run deploy
 
 cd ..
 
-gcloud functions list
-
-echo -e "${Red} Deploy completed"
+echo -e "${Green} Deploy completed. \nList functions:"
 echo -e "${Color_Off}"
+
+gcloud functions list

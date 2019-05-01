@@ -7,7 +7,7 @@ Yellow='\033[0;33m'       # Yellow
 Blue='\033[0;34m'         # Blue
 
 
-echo -e "${Green} Start emulator"
+echo -e "${Blue} Start emulator"
 functions start
 
 echo -e "Start deploy ..."
@@ -25,5 +25,5 @@ npm run deploy:local
 
 cd ..
 
-echo -e "${Red} Deploy completed"
+echo -e "${Green} Deploy completed"
 echo -e "${Color_Off}"

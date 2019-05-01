@@ -6,6 +6,7 @@ let browser;
 
 async function getNewPage() {
     if (!browser) {
+        console.log('Launch new browser');
         browser = await puppeteer.launch({
             args: ['--no-sandbox',
                 '--headless',
@@ -19,6 +20,8 @@ async function getNewPage() {
 
 async function generate(req, res) {
     const url = req.query.url
+
+    console.log(`Generate pdf from ${url}`)
 
     const page = await getNewPage();
 
@@ -40,15 +43,21 @@ async function generate(req, res) {
     const buffer = await page.pdf(options);
     console.log(`Generate pdf Ok ${url}`, buffer.length)
 
-    //Upload pdf file to google storage
-    var filename = `${uuidv4()}.pdf`;
-    var url = await storage.uploadPdf(buffer, filename);
     res.status(200).json({
         status: 'Ok',
         code: 0,
-        length: buffer.length,
-        url
+        length: buffer.length
     })
+
+    //Upload pdf file to google storage
+    // var filename = `${uuidv4()}.pdf`;
+    // var uploadURL = await storage.uploadPdf(buffer, filename);
+    // res.status(200).json({
+    //     status: 'Ok',
+    //     code: 0,
+    //     length: buffer.length,
+    //     url:uploadURL
+    // })
 
     await page.close();
 }
