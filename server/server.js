@@ -57,7 +57,6 @@ app.use('/version', function (req, res) {
 });
 
 app.use('/', function(req, res, next) {
-    console.log('req', req.url);
     if(req.url === '/'){
         return res.status(200).send();
     }else{
