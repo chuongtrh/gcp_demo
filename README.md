@@ -42,3 +42,8 @@ $ ab -c 100 -n 5000 YOUR_URL/api/users
 ```
 $ artillery quick -c 100 -n 100 -d 1 YOUR_URL/api/users
 ```
+
+# Setup with Cloud Function
+
+# Reference
+* https://hackernoon.com/serverless-moderate-fun-with-modular-functions-df98ca6cb981

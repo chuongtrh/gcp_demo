@@ -89,18 +89,18 @@ app.use('/api', function (req, res, next) {
 app.use('/api/ping', routes.ping);
 app.use('/api/users', routes.user);
 app.use('/api/messages', routes.message);
-
+app.use('/api/invoice', routes.invoice);
 
 // Error handler for API issues
-app.use('/api', function (err, request, response, next) {
+app.use('/api', function (err, req, res, next) {
 
     if (process.env.NODE_ENV === 'local') {
         console.log('uncaughtException', err);
     }
 
-    return response.status(500).send({
+    return res.status(500).send({
         status: 'ERROR',
-        errorCode: 1,
+        code: 1,
         message: String(err)
     });
 });

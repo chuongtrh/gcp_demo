@@ -45,6 +45,7 @@ web/node_modules/
 web/build/
 server/src/test/output
 server/src/config/local.js
+key/
 
 # TypeScript v1 declaration files
 typings/

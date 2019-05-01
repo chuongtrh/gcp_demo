@@ -1,0 +1,21 @@
+{
+  "name": "pdf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "gcloud functions deploy pdf --trigger-http --source=. --runtime nodejs8 --memory 1024MB --region asia-northeast1",
+    "start:emulator": "functions start",
+    "deploy:local": "functions deploy pdf --trigger-http --local-path=. --region asia-northeast1",
+    "stop:emulator": "functions stop"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/storage": "^2.5.0",
+    "cors": "^2.8.5",
+    "modofun": "^1.2.2",
+    "puppeteer": "^1.15.0",
+    "uuid": "^3.3.2"
+  }
+}

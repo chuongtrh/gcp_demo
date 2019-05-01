@@ -27,6 +27,7 @@ steps:
     - build
 
   # https://cloud.google.com/run/docs/securing/managing-access
+  # https://cloud.google.com/run/docs/securing/authenticating
   # Deploy container image to Cloud Run
 - id: deploy
   name: 'gcr.io/cloud-builders/gcloud'

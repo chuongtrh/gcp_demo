@@ -20,7 +20,10 @@
         "@google/cloud-trace": "^0.6.3",
         "body-parser": "^1.18.3",
         "express": "^4.16.4",
+        "handlebars": "^4.1.2",
         "helmet": "^3.16.0",
+        "request": "^2.88.0",
+        "request-promise": "^4.2.4",
         "uuid": "^3.3.2"
     },
     "devDependencies": {
