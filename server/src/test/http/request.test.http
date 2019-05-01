@@ -49,8 +49,3 @@ content-type: application/json
 ###
 GET https://balmy-channel-211708.appspot.com:8080/api/ping
 content-type: application/json
-
-
-###
-GET http://localhost:4300/api/invoice/create?isPaid=0
-content-type: application/json

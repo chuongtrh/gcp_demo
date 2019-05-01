@@ -7,7 +7,7 @@ service: default
 env_variables:
   NODE_ENV: dev
   RUN_PORT: 8080
-
+  HOST_CLOUDFUNCTION: https://asia-northeast1-balmy-channel-211708.cloudfunctions.net
 skip_files:
 - test/
 - local.js

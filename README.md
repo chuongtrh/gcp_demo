@@ -10,7 +10,7 @@ $ npm run start:local
 
 ## Run cloud build & deploy
 ```
-$ npm run deploy:dev
+$ npm run deploy:app
 ```
 
 # Setup with Cloud Run

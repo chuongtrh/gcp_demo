@@ -1,3 +1,4 @@
+
 ###
 GET http://localhost:8010/balmy-channel-211708/asia-northeast1/pdf/generate?url=http://example.com
 content-type: application/json

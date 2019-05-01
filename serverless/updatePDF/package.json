@@ -1,0 +1,23 @@
+{
+  "name": "updatepdf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "gcloud functions deploy updatePDF --trigger-http --source=. --runtime nodejs8 --memory 1024MB --region asia-northeast1",
+    "start:emulator": "functions start",
+    "deploy:local": "functions deploy updatePDF --trigger-http --local-path=. --region asia-northeast1",
+    "stop:emulator": "functions stop"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/storage": "^2.5.0",
+    "cors": "^2.8.5",
+    "hummus": "^1.0.104",
+    "memory-streams": "^0.1.3",
+    "modofun": "^1.2.2",
+    "request": "^2.88.0",
+    "uuid": "^3.3.2"
+  }
+}

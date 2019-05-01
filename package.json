@@ -9,7 +9,7 @@
     "start:server": "npm run start:local --prefix server",
     "prestart:docker": "docker build -t gcp-demo -f docker/server.local.dockerfile --no-cache .",
     "start:docker": "docker run --rm -it -p 4300:4300/tcp gcp-demo:latest",
-    "deploy:dev": "gcloud builds submit --config appservice_cloudbuild.yaml .",
+    "deploy:app": "gcloud builds submit --config appservice_cloudbuild.yaml .",
     "deploy:cloudrun": "gcloud builds submit --config cloudrun_cloudbuild.yaml ."
 
   },
