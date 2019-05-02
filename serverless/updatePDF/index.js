@@ -1,6 +1,6 @@
 const modofun = require('modofun');
 const cors = require('cors')
-const updatePDF = require('./updatePDF');
+const updatePDF = require('./src/updatePDF');
 
 exports.updatePDF = modofun(updatePDF, {
     type: 'gcloud',

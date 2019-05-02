@@ -1,6 +1,6 @@
 const modofun = require('modofun');
 const cors = require('cors')
-const pdf = require('./pdf');
+const pdf = require('./src/pdf');
 
 
 exports.pdf = modofun(pdf, {
