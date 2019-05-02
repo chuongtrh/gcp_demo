@@ -40,10 +40,13 @@ async function generate(req, res) {
         waitUntil: 'networkidle0',
         timeout: 20000
     });
+
     const buffer = await page.pdf(options);
     console.log(`Generate pdf Ok ${url}`, buffer.length)
 
-    res.status(200).json({
+    page.close();
+
+    return res.status(200).json({
         status: 'Ok',
         code: 0,
         length: buffer.length
@@ -58,8 +61,6 @@ async function generate(req, res) {
     //     length: buffer.length,
     //     url:uploadURL
     // })
-
-    await page.close();
 }
 
 async function create(req, res) {
@@ -88,19 +89,21 @@ async function create(req, res) {
     }
 
     const buffer = await page.pdf(options);
-    console.log(`Create pdf Ok`, buffer.length)
+    console.log(`Create pdf Ok`, buffer.length);
+
+    page.close();
 
     //Upload pdf file to google storage
     var filename = `${uuidv4()}.pdf`;
     var url = await storage.uploadPdf(buffer, filename);
-    res.status(200).json({
+    
+    return res.status(200).json({
         status: 'Ok',
         code: 0,
         length: buffer.length,
         url
     })
 
-    await page.close();
 }
 module.exports = {
     generate,
