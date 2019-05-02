@@ -7,9 +7,9 @@ steps:
   - functions
   - deploy
   - updatePDF
-  - -- max-instances=20
-  - -- source=.
-  - -- runtime=nodejs8
-  - -- trigger-http
-  - -- memory=1024MB
-  - -- region=asia-northeast1
+  - --max-instances=20
+  - --source=.
+  - --runtime=nodejs8
+  - --trigger-http
+  - --memory=1024MB
+  - --region=asia-northeast1
