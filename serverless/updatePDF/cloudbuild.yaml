@@ -2,14 +2,14 @@ steps:
 - name: 'gcr.io/cloud-builders/npm'
   args: ['install', '--production']
 - name: 'gcr.io/cloud-builders/gcloud'
- args:
- - beta
- - functions
- - deploy
- - updatePDF
- - -- max-instances=20
- - -- source=.
- - -- runtime=nodejs8
- - -- trigger-http
- - -- memory=1024MB
- - -- region=asia-northeast1
+  args:
+  - beta
+  - functions
+  - deploy
+  - updatePDF
+  - -- max-instances=20
+  - -- source=.
+  - -- runtime=nodejs8
+  - -- trigger-http
+  - -- memory=1024MB
+  - -- region=asia-northeast1
