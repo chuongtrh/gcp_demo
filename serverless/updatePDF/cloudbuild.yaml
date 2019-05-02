@@ -8,7 +8,7 @@ steps:
   - deploy
   - updatePDF
   - --max-instances=20
-  - --source=/serverless/updatePDF
+  - --source=./serverless/updatePDF/.
   - --runtime=nodejs8
   - --trigger-http
   - --memory=1024MB
