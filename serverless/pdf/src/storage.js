@@ -4,7 +4,7 @@ const {
 
 const storage = new Storage({
     projectId: 'balmy-channel-211708',
-    keyFilename: '../key/54d7f39f4e4a.json'
+    keyFilename: './key/54d7f39f4e4a.json'
 });
 const bucketName = 'red-pdf'
 

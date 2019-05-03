@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 const storage = require('./storage');
 const uuidv4 = require('uuid')
+const helper = require('./helper');
 
 let browser;
 
@@ -49,7 +50,8 @@ async function generate(req, res) {
     return res.status(200).json({
         status: 'Ok',
         code: 0,
-        length: buffer.length
+        length: buffer.length,
+        hash: helper.hashSHA256(buffer)
     })
 
     //Upload pdf file to google storage
@@ -101,7 +103,8 @@ async function create(req, res) {
         status: 'Ok',
         code: 0,
         length: buffer.length,
-        url
+        url,
+        hash: helper.hashSHA256(buffer)
     })
 
 }

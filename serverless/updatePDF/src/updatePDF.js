@@ -134,7 +134,8 @@ function update(req, res) {
                         status: 'Ok',
                         code: 0,
                         length: buffer.length,
-                        url
+                        url,
+                        hash: helper.hashSHA256(buffer)
                     })
                 })
         })

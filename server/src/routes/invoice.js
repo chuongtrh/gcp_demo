@@ -56,7 +56,8 @@ router.get('/create', (req, res, next) => {
             return res.status(200).send({
                 status: 'Ok',
                 code: 0,
-                url: data.url
+                url: data.url,
+                hash: data.hash
             });
         })
         .catch(function (err) {
@@ -104,7 +105,8 @@ router.post('/sign', (req, res, next) => {
                 status: 'Ok',
                 code: 0,
                 url: data.url,
-                source: url
+                source: url,
+                hash: data.hash
             });
         })
         .catch(function (err) {
