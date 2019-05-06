@@ -1,13 +1,13 @@
 runtime: nodejs
 env: flex
-service: pdfService
+service: pdfservice
 
 # https://cloud.google.com/appengine/docs/flexible/custom-runtimes/build#listening_to_port_8080
 env_variables:
   NODE_ENV: dev
   RUN_PORT: 8080
 skip_files:
-- test/
+- src/test/
 - local.js
 
 # https://cloud.google.com/appengine/docs/standard/
@@ -15,7 +15,7 @@ skip_files:
 # https://cloud.google.com/appengine/docs/standard/python/config/appref#scaling_elements
 # https://medium.com/google-cloud/app-engine-scheduler-settings-and-instance-count-4d1e669f33d5
 
-instance_class: F2
+instance_class: F4_1G
 automatic_scaling:
   min_num_instances: 1
   max_num_instances: 5

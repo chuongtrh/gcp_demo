@@ -10,7 +10,7 @@ RUN rm -rf /usr/src/app/src/test
 
 # Install app dependencies
 # COPY package.json .
-COPY server/package*.json ./
+COPY server/package.json ./
 
 # Set Environment
 ENV NODE_ENV=local

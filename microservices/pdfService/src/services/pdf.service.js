@@ -1,20 +1,31 @@
-const puppeteer = require('../../node_modules/puppeteer');
+const puppeteer = require('puppeteer');
 const storage = require('./storage.service');
-const uuidv4 = require('../../node_modules/uuid')
-const helper = require('../utils/helper');
+const uuidv4 = require('uuid')
 
 let browser;
 
 async function getNewPage() {
     if (!browser) {
-        console.log('Launch new browser');
-        browser = await puppeteer.launch({
-            args: ['--no-sandbox',
-                '--headless',
-                '--disable-dev-shm-usage',
-                '--disable-gpu'
-            ]
-        });
+        var launchOptions;
+        if (process.env.IS_DOCKER === 1) {
+            launchOptions = {
+                executablePath: '/usr/bin/chromium-browser',
+                args: ['--no-sandbox',
+                    '--headless',
+                    '--disable-dev-shm-usage',
+                    '--disable-gpu'
+                ]
+            };
+        } else {
+            launchOptions = {
+                args: ['--no-sandbox',
+                    '--headless',
+                    '--disable-dev-shm-usage'
+                ]
+            };
+        }
+        console.log('Launch new browser', process.env.NODE_ENV, JSON.stringify(launchOptions, null , 2));
+        browser = await puppeteer.launch(launchOptions);
     }
     return browser.newPage();
 }
@@ -67,7 +78,10 @@ async function create(options, finalHtml, isRemoteContent) {
     //Upload pdf file to google storage
     var filename = `${uuidv4()}.pdf`;
     var url = await storage.uploadPdf(buffer, filename);
-    return {buffer, url};
+    return {
+        buffer,
+        url
+    };
 }
 module.exports = {
     generate,

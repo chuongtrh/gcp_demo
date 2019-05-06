@@ -20,14 +20,14 @@ steps:
   
 - id: deploy
   name: 'gcr.io/cloud-builders/gcloud'
-  args: ['app', 'deploy', 'microservices/pdfService/app.yaml', '--quiet', '--verbosity=debug']
+  args: ['app', 'deploy', 'microservices/pdfService/pdfService.yaml', '--quiet', '--verbosity=debug']
   timeout: 900s
   waitFor:
     - build
 
 timeout: 1200s
 substitutions:
-  _IMAGE_NAME: pdfService-image
+  _IMAGE_NAME: pdfservice-image
 options:
   machineType: 'N1_HIGHCPU_8'
   substitution_option: 'ALLOW_LOOSE'

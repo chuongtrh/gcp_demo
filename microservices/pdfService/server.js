@@ -23,13 +23,13 @@ if (fs.existsSync(path.join(__dirname, '.version'))) {
 
 var errorHandler;
 if (process.env.NODE_ENV === 'production') {
-    require('./node_modules/@google/cloud-trace').start();
-    errorHandler = require('./node_modules/@google/cloud-errors').start();
+    require('@google/cloud-trace').start();
+    errorHandler = require('@google/cloud-errors').start();
 }
 
-const helmet = require('./node_modules/helmet')
-const express = require('./node_modules/express');
-const bodyParser = require('./node_modules/body-parser');
+const helmet = require('helmet')
+const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 
 app.use(helmet());
@@ -51,7 +51,8 @@ app.use('/version', function (req, res) {
         status: 'running',
         env: process.env.NODE_ENV,
         port: process.env.RUN_PORT,
-        version: process.env.BUILD_VERSION
+        version: process.env.BUILD_VERSION,
+        env_variables: JSON.stringify(process.env, null, 2)
     })
 });
 

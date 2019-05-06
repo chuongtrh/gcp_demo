@@ -7,9 +7,9 @@ service: default
 env_variables:
   NODE_ENV: dev
   RUN_PORT: 8080
-  HOST_CLOUDFUNCTION: https://asia-northeast1-balmy-channel-211708.cloudfunctions.net
+  HOST_CLOUDFUNCTION: https://pdfservice-dot-balmy-channel-211708.appspot.com/api/pdf
 skip_files:
-- test/
+- src/test/
 - local.js
 
 # https://cloud.google.com/appengine/docs/standard/

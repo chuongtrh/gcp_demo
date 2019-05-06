@@ -9,13 +9,15 @@
     "start:local": "run-p start:app start:pdf",
     "start:app": "cd server && npm run start:local",
     "start:pdf": "cd microservices/pdfService && npm run start:local",
+    "start:docker": "concurrently \"npm run start:pdf:docker\" \"npm run start:app:docker\"",
     "prestart:app:docker": "docker build -t app-demo -f docker/server.local.dockerfile --no-cache .",
-    "start:app:docker": "docker run --rm -it -p 4300:4300/tcp app-demo:latest",
+    "start:app:docker": "docker run --rm -d -p 4300:4300/tcp app-demo:latest",
     "prestart:pdf:docker": "docker build -t pdf-service -f docker/pdfService.local.dockerfile --no-cache .",
-    "start:pdf:docker": "docker run --rm -it -p 4400:4400/tcp pdf-service:latest",
+    "start:pdf:docker": "docker run --rm -d -p 4400:4400/tcp pdf-service:latest",
     "deploy:app": "gcloud builds submit --config cloudbuild/appservice_cloudbuild.yaml .",
     "deploy:cloudrun": "gcloud builds submit --config cloudbuild/cloudrun_cloudbuild.yaml .",
-    "deploy:pdf": "gcloud builds submit --config cloudbuild/pdfservice_cloudbuild.yaml ."
+    "deploy:pdf": "gcloud builds submit --config cloudbuild/pdfservice_cloudbuild.yaml .",
+    "deploy": "concurrently \"npm run deploy:pdf\" \"npm run deploy:app\""
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +26,7 @@
   },
   "homepage": "https://github.com/chuongtrh/gcp_demo#readme",
   "devDependencies": {
+    "concurrently": "^4.1.0",
     "npm-run-all": "^4.1.5"
   }
 }

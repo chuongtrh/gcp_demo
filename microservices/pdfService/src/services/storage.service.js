@@ -1,6 +1,6 @@
 const {
     Storage
-} = require('../../node_modules/@google-cloud/storage/build/src');
+} = require('@google-cloud/storage/build/src');
 
 const storage = new Storage({
     projectId: 'balmy-channel-211708',

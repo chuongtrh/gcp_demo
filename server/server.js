@@ -52,7 +52,8 @@ app.use('/version', function (req, res) {
         status: 'running',
         env: process.env.NODE_ENV,
         port: process.env.RUN_PORT,
-        version: process.env.BUILD_VERSION
+        version: process.env.BUILD_VERSION,
+        env_variables: JSON.stringify(process.env, null, 2)
     })
 });
 

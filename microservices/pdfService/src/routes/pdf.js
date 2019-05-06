@@ -1,4 +1,4 @@
-const router = module.exports = require('../../node_modules/express').Router();
+const router = module.exports = require('express').Router();
 
 const helper = require('../utils/helper');
 const pdfService = require('../services/pdf.service');

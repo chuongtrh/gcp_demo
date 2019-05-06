@@ -1,9 +1,9 @@
 const path = require("path");
 const helper = require('../utils/helper');
-const streams = require('../../node_modules/memory-streams');
-const hummus = require('../../node_modules/hummus/hummus');
+const streams = require('memory-streams');
+const hummus = require('hummus/hummus');
 const storage = require('./storage.service');
-const uuidv4 = require('../../node_modules/uuid');
+const uuidv4 = require('uuid');
 
 
 function addImageControlToPDF(pdfWriter, pageModifier, pageInfo, ctrl) {
