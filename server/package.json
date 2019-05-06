@@ -34,11 +34,6 @@
         "cryptiles": ">=4.1.2",
         "hoek": ">=4.2.1"
     },
-    "esm": {
-        "mode": "auto",
-        "force": true,
-        "await": false
-    },
     "babel": {
         "presets": [
             [

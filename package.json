@@ -3,15 +3,19 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "postinstall": "run-p install:server",
-    "install:server": "cd server && npm install",
-    "start:local": "run-p start:server",
-    "start:server": "npm run start:local --prefix server",
-    "prestart:docker": "docker build -t gcp-demo -f docker/server.local.dockerfile --no-cache .",
-    "start:docker": "docker run --rm -it -p 4300:4300/tcp gcp-demo:latest",
-    "deploy:app": "gcloud builds submit --config appservice_cloudbuild.yaml .",
-    "deploy:cloudrun": "gcloud builds submit --config cloudrun_cloudbuild.yaml ."
-
+    "postinstall": "run-p install:app install:pdf",
+    "install:app": "cd server && npm install",
+    "install:pdf": "cd microservices/pdfService && npm install",
+    "start:local": "run-p start:app start:pdf",
+    "start:app": "cd server && npm run start:local",
+    "start:pdf": "cd microservices/pdfService && npm run start:local",
+    "prestart:app:docker": "docker build -t app-demo -f docker/server.local.dockerfile --no-cache .",
+    "start:app:docker": "docker run --rm -it -p 4300:4300/tcp app-demo:latest",
+    "prestart:pdf:docker": "docker build -t pdf-service -f docker/pdfService.local.dockerfile --no-cache .",
+    "start:pdf:docker": "docker run --rm -it -p 4400:4400/tcp pdf-service:latest",
+    "deploy:app": "gcloud builds submit --config cloudbuild/appservice_cloudbuild.yaml .",
+    "deploy:cloudrun": "gcloud builds submit --config cloudbuild/cloudrun_cloudbuild.yaml .",
+    "deploy:pdf": "gcloud builds submit --config cloudbuild/pdfservice_cloudbuild.yaml ."
   },
   "author": "",
   "license": "ISC",

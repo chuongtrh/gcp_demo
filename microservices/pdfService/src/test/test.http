@@ -1,0 +1,4 @@
+
+###
+GET http://localhost:4400/api/pdf/generate?url=https://github.com
+content-type: application/json

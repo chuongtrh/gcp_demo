@@ -43,7 +43,8 @@ router.get('/create', (req, res, next) => {
 
     request({
             method: 'POST',
-            uri: `${process.env.HOST_CLOUDFUNCTION}/pdf/create`,
+            //uri: `${process.env.HOST_CLOUDFUNCTION}/pdf/create`,
+            uri: `${process.env.HOST_CLOUDFUNCTION}/create`,
             body: {
                 options,
                 finalHtml,
@@ -92,7 +93,8 @@ router.post('/sign', (req, res, next) => {
 
     request({
             method: 'POST',
-            uri: `${process.env.HOST_CLOUDFUNCTION}/updatePDF/update`,
+            // uri: `${process.env.HOST_CLOUDFUNCTION}/updatePDF/update`,
+            uri: `${process.env.HOST_CLOUDFUNCTION}/update`,
             body: {
                 dataSources,
                 url,

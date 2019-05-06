@@ -1,0 +1,37 @@
+runtime: nodejs
+env: flex
+service: pdfService
+
+# https://cloud.google.com/appengine/docs/flexible/custom-runtimes/build#listening_to_port_8080
+env_variables:
+  NODE_ENV: dev
+  RUN_PORT: 8080
+skip_files:
+- test/
+- local.js
+
+# https://cloud.google.com/appengine/docs/standard/
+# https://cloud.google.com/appengine/docs/standard/java/runtime#concurrency_and_latency
+# https://cloud.google.com/appengine/docs/standard/python/config/appref#scaling_elements
+# https://medium.com/google-cloud/app-engine-scheduler-settings-and-instance-count-4d1e669f33d5
+
+instance_class: F2
+automatic_scaling:
+  min_num_instances: 1
+  max_num_instances: 5
+  max_concurrent_requests: 20
+  cpu_utilization:
+    target_utilization: 0.4
+
+liveness_check:
+  path: "/liveness_check"
+  check_interval_sec: 20
+  timeout_sec: 4
+  failure_threshold: 2
+  success_threshold: 2
+
+# instance_class: B4
+# manual_scaling:
+#   instances: 1
+# health_check:
+#   enable_health_check: False
