@@ -19,6 +19,35 @@ async function getNewPage() {
     return browser.newPage();
 }
 
+async function screenshot(req, res) {
+    const url = req.query.url
+
+    console.log(`Screenshot pdf from ${url}`)
+
+    const page = await getNewPage();
+
+    await page.goto(url);
+
+    const buffer = await page.screenshot({
+        fullPage: true,
+        type: 'jpeg',
+        quality: 80
+    });
+    console.log(`Screenshot Ok ${url}`, buffer.length)
+
+    page.close();
+
+    //Upload pdf file to google storage
+    var filename = `${uuidv4()}.jpeg`;
+    var uploadURL = await storage.uploadImage(buffer, filename);
+    res.status(200).json({
+        status: 'Ok',
+        code: 0,
+        length: buffer.length,
+        url:uploadURL
+    })
+}
+
 async function generate(req, res) {
     const url = req.query.url
 
@@ -37,10 +66,7 @@ async function generate(req, res) {
         },
         printBackground: true
     }
-    await page.goto(url, {
-        waitUntil: 'networkidle0',
-        timeout: 20000
-    });
+    await page.goto(url);
 
     const buffer = await page.pdf(options);
     console.log(`Generate pdf Ok ${url}`, buffer.length)
@@ -64,7 +90,6 @@ async function generate(req, res) {
     //     url:uploadURL
     // })
 }
-
 async function create(req, res) {
     const options = req.body.options;
     const finalHtml = req.body.finalHtml;
@@ -84,7 +109,7 @@ async function create(req, res) {
     if (isRemoteContent === true) {
         await page.goto(`data:text/html,${finalHtml}`, {
             waitUntil: 'load',
-            timeout: 60000
+            timeout: 10000
         });
     } else {
         await page.setContent(finalHtml);
@@ -110,5 +135,6 @@ async function create(req, res) {
 }
 module.exports = {
     generate,
-    create
+    create,
+    screenshot
 }

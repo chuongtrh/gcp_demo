@@ -15,7 +15,8 @@
     "prestart:pdf:docker": "docker build -t pdf-service -f docker/pdfService.local.dockerfile --no-cache .",
     "start:pdf:docker": "docker run --rm -d -p 4400:4400/tcp pdf-service:latest",
     "deploy:app": "gcloud builds submit --config cloudbuild/appservice_cloudbuild.yaml .",
-    "deploy:cloudrun": "gcloud builds submit --config cloudbuild/cloudrun_cloudbuild.yaml .",
+    "deploy:app:cloudrun": "gcloud builds submit --config cloudbuild/appservice_cloudrun.yaml .",
+    "deploy:pdf:cloudrun": "gcloud builds submit --config cloudbuild/pdfservice_cloudrun.yaml .",
     "deploy:pdf": "gcloud builds submit --config cloudbuild/pdfservice_cloudbuild.yaml .",
     "deploy": "concurrently \"npm run deploy:pdf\" \"npm run deploy:app\""
   },

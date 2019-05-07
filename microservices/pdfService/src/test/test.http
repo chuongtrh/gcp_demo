@@ -2,3 +2,9 @@
 ###
 GET http://localhost:4400/api/pdf/generate?url=https://github.com
 content-type: application/json
+
+
+
+###
+GET https://pdfservice-dot-balmy-channel-211708.appspot.com/api/pdf/generate?url=https://github.com
+content-type: application/json

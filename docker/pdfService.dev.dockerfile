@@ -7,11 +7,9 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 COPY microservices/pdfService /usr/src/app
-RUN rm -rf /usr/src/app/src/config/local.js
-RUN rm -rf /usr/src/app/src/test
+COPY microservices/pdfService/package.json ./
 
-# Install app dependencies
-COPY microservices/pdfService/package*.json ./
+RUN rm -rf /usr/src/app/node_modules
 
 # Set Environment
 ENV NODE_ENV=dev

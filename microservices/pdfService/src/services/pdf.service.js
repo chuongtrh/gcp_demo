@@ -1,4 +1,5 @@
-const puppeteer = require('puppeteer');
+const chrome = require('chrome-aws-lambda');
+const puppeteer = require('puppeteer-core');
 const storage = require('./storage.service');
 const uuidv4 = require('uuid')
 
@@ -6,26 +7,12 @@ let browser;
 
 async function getNewPage() {
     if (!browser) {
-        var launchOptions;
-        if (process.env.IS_DOCKER === 1) {
-            launchOptions = {
-                executablePath: '/usr/bin/chromium-browser',
-                args: ['--no-sandbox',
-                    '--headless',
-                    '--disable-dev-shm-usage',
-                    '--disable-gpu'
-                ]
-            };
-        } else {
-            launchOptions = {
-                args: ['--no-sandbox',
-                    '--headless',
-                    '--disable-dev-shm-usage'
-                ]
-            };
-        }
-        console.log('Launch new browser', process.env.NODE_ENV, JSON.stringify(launchOptions, null , 2));
-        browser = await puppeteer.launch(launchOptions);
+        console.log('Launch new browser', chrome);
+        browser = await puppeteer.launch({
+            args: chrome.args,
+            executablePath: await chrome.executablePath,
+            headless: chrome.headless,
+        });
     }
     return browser.newPage();
 }
@@ -44,10 +31,11 @@ async function generate(url) {
         },
         printBackground: true
     }
-    await page.goto(url, {
-        waitUntil: 'networkidle0',
-        timeout: 20000
-    });
+    await page.goto(url);
+    // await page.goto(url, {
+    //     waitUntil: 'networkidle0',
+    //     timeout: 20000
+    // });
 
     const buffer = await page.pdf(options);
     console.log(`Generate pdf Ok ${url}`, buffer.length)
