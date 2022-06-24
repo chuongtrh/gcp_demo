@@ -20,7 +20,7 @@
         "@google/cloud-trace": "^0.6.3",
         "body-parser": "^1.19.0",
         "express": "^4.17.1",
-        "handlebars": "^4.7.4",
+        "handlebars": "^4.7.7",
         "helmet": "^3.22.0",
         "request": "^2.88.2",
         "request-promise": "^4.2.5",
